@@ -20,5 +20,8 @@ server.get('/', function(req,res){
 const userRoute = require('./api/routes/userRoute');
 userRoute(server);
 
+const roomRoute = require('./api/routes/roomRoute');
+roomRoute(server);
+
 
 server.listen(port, hostname);
