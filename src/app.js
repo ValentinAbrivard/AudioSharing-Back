@@ -15,7 +15,10 @@ server.use(cors());
 
 server.get('/', function(req,res){
   res.sendFile(path.join(__dirname+'/index.html'));
-})
+});
+
+const userRoute = require('./api/routes/userRoute');
+userRoute(server);
 
 
 server.listen(port, hostname);
