@@ -12,13 +12,15 @@ let user = new Schema({
   },
   description: {
     type: String,
+    default: ""
   },
   photo: {
       type: String,
-  },
-  idRoom: {
-      type: String
+      default: ""
   }
+  // idRoom: {
+  //     type: String
+  // }
 });
 
 module.exports = mongoose.model('User', user);

@@ -54,31 +54,77 @@ exports.create_a_user = (req, res) => {
     })
 }
 
+exports.get_a_user = (req, res) => {
+    let {user_id} = req.params;
+    User.findById(user_id, (error, user) => {
+        if(error){
+            res.status(500);
+            console.log(error);
+            res.json({message: "Erreur serveur."})
+        }
+        else{
+            res.status(200);
+            res.json(user);
+        }
+    })
+}
+
+exports.delete_a_user = (req, res) => {
+    let {user_id} = req.params;
+    User.findById(user_id, (error, user) => {
+        if(error){
+            res.status(500);
+            console.log(error);
+            res.json({message: "Erreur serveur."})
+        }
+        else{
+            res.status(200);
+            res.json(user);
+        }
+    }).remove().exec();
+}
 
 exports.user_login = (req, res) => {
-    let {body} = req;
-    // let body = req.body
+  let {body} = req;
+  // let body = req.body
+  console.log("login");
+  User.findOne({nomdecompte: body.nomdecompte})
 
-    User.findOne({nomdecompte: body.nomdecompte})
+  .then(user => {
+    let hash = user.password;
+    var result = bcrypt.compareSync(body.password, hash); // true
+    if(result){
+      res.status(200);
+      res.json(user);
+      console.log("LOGIN ----------");
+    }
+    else{
+      res.status(500);
+      res.json({message: "Error serveur identifiants"})
+    }
+  })
+  .catch(error => {
+    res.status(403);
+    res.json({message: "identifiants incorrects."})
+  })
+}
 
-    .then(user => {
-      let hash = user.password;
-      var result = bcrypt.compareSync(body.password, hash); // true
-      if(result){
-        res.status(200);
-        res.json(user);
-        console.log("LOGIN ----------");
-      }
-      else{
-        res.status(500);
-        res.json({message: "Error serveur identifiants"})
-      }
-    })
-    .catch(error => {
-      res.status(403);
-      res.json({message: "identifiants incorrects."})
-    })
-  };
+exports.update_user = (req, res) => {
+  let {user_id} = req.params;
+  console.log(user_id);
+  console.log(req.body);
+  User.findByIdAndUpdate(user_id, req.body, {new: true}, (error, user) => {
+    if(error){
+      res.status(500);
+      console.log(error);
+      res.json({message: "Erreur serveur."})
+    }
+    else {
+      res.status(200);
+      res.json(user);
+    }
+  })
+}
 
 exports.create_a_token_from_user = (req, res) => {
     User.findOne({nomdecompte: req.body.nomdecompte})
