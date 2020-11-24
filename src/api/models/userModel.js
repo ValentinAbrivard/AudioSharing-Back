@@ -15,6 +15,9 @@ let user = new Schema({
   },
   photo: {
       type: String,
+  },
+  idRoom: {
+      type: String
   }
 });
 
