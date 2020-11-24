@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Room = require('../models/roomModel');
 
 exports.list_all_users = (req, res) => {
