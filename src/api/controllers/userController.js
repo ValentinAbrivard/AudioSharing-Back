@@ -54,7 +54,7 @@ exports.create_a_user = (req, res) => {
     })
 }
 
-exports.get_a_user = (req, res) => {
+exports.get_one_user = (req, res) => {
     let {user_id} = req.params;
     User.findById(user_id, (error, user) => {
         if(error){
@@ -146,4 +146,25 @@ exports.create_a_token_from_user = (req, res) => {
           }
         })
     })
+  };
+
+
+  exports.get_payload_from_token = (req, res) => {
+    console.log("début fonction get user by jwt")
+      let body= req.query
+      let usertoken = body.token
+      //console.log(req)
+      console.log(req.body)
+      console.log(req.params)
+      console.log("Usertoken : ")
+      console.log(usertoken)
+      jwt.verify(usertoken, process.env.JWT_KEY, function(err, decoded) {
+        console.log(decoded)
+          res.status(200);
+          res.json ({
+            username : decoded.username,
+            userid : decoded.userid
+          });
+        
+      });
   };
