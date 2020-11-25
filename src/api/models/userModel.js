@@ -17,10 +17,10 @@ let user = new Schema({
   photo: {
       type: String,
       default: ""
+  },
+  idRoom: {
+      type: String
   }
-  // idRoom: {
-  //     type: String
-  // }
 });
 
 module.exports = mongoose.model('User', user);
