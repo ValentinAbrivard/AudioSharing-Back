@@ -1,3 +1,9 @@
+Welcome to out project. 
+
+Back-end : https://github.com/ValentinAbrivard/AudioSharing-Back
+
+Frontend : https://github.com/ValentinAbrivard/AudioSharing-Front
+
 ## URL
 ```
 127.0.0.1:3000
@@ -15,7 +21,7 @@ If you still get the issue contact me at : v.abrivard@ecole-ipssi.net
 
 ## Main Page website
 ```
-Login.html
+127.0.0.1:3004
 ```
 
 ## Access to docker
